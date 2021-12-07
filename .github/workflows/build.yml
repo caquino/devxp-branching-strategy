@@ -41,12 +41,6 @@ jobs:
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
 
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
       - name: Setup DevXP Branching Strategy Tooling
         uses: caquino/devxp-branching-strategy@main
