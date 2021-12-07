@@ -1,0 +1,35 @@
+name: Grant packages permission
+
+on:
+  repository_dispatch:
+    types: [ 'add_access' ]
+
+env:
+  PACKAGE_NAME: setup-devxp-branch
+  REQUEST_BODY: |
+    {
+      "collaborator": "repository/XXXXX"
+    }
+
+jobs:
+  add-actions-access:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Add repository to packages allowed repositories
+        uses: octokit/request-action@v2.x
+        id: add_actions_access
+        with:
+          route: GET /orgs/{owner}/{repo}/packages/container/{package_name}/settings/add_actions_access
+          body: ${{ toJSON(env.REQUEST_BODY )}}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.repository }}
+          package_name: ${{ env.PACKAGE_NAME }}
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo latest release: ${{ setps.add_actions_access.outputs.data }}"
+

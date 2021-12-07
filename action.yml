@@ -1,0 +1,5 @@
+name: 'DevXP Branching Strategy Scripts Setup'
+description: 'Install Developer Experience Branching Strategy support scripts.'
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/Flutter-Global/devxp-branching-strategy/setup-devxp-branch:latest'
