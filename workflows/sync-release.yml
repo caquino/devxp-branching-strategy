@@ -46,9 +46,6 @@ jobs:
          git tag ${{ steps.extract_version.outputs.version }}
          git push origin ${{ steps.extract_version.outputs.version }} --tags
 
-     - name: Make sync-develop executable
-       run: chmod +x "${GITHUB_WORKSPACE}/devxp-branching-strategy/sync-develop.sh"
-
      - name: Synchronize PPB develop
        run: |
          bash ${GITHUB_WORKSPACE}/devxp-branching-strategy/sync-develop.sh ppb ${{ steps.extract_division.outputs.division }}_rel ${{ github.event.repository.default_branch }}

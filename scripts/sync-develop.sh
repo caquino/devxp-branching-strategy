@@ -14,8 +14,7 @@ echo "Sync Reason: $syncReason"
 
 git checkout ${brand}/develop
 git pull
-chmod +x "${GITHUB_WORKSPACE}/.github/gen-sync-semver.sh"
-nextTag=$(bash ${GITHUB_WORKSPACE}/.github/gen-sync-semver.sh ${syncReason})
+nextTag=$(bash ${GITHUB_WORKSPACE}/devxp-bracnhing-strategy/gen-sync-semver.sh ${syncReason})
 echo "Next tag: $nextTag"
 git merge --squash "${defaultBranch}" -m "Merged ${defaultBranch} into ${brand}/develop"
 git diff-index --quiet HEAD || git commit -m "Merged ${defaultBranch} into ${brand}/develop"
